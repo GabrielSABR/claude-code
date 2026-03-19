@@ -6,7 +6,8 @@ $projectPaths = @(
     "C:\Users\alves\.claude\projects\C--Users-alves-OneDrive-Documentos-Claude-Code"
 )
 
-$outputDir = "C:\Users\alves\OneDrive\Documentos\Claude Code\conversas"
+$today = Get-Date -Format "yyyy-MM-dd"
+$outputDir = "C:\Users\alves\OneDrive\Documentos\Claude Code\conversas\$today"
 if (-not (Test-Path $outputDir)) { New-Item -ItemType Directory -Path $outputDir | Out-Null }
 
 $novos = 0
