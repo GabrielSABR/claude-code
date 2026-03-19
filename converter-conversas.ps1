@@ -80,24 +80,31 @@ foreach ($projectPath in $projectPaths) {
         }
         if ($messages.Count -eq 0) { continue }
 
+        # Define o slug do arquivo
         if (-not $processedFirst -and $tituloManual -ne "") {
             $slug = $tituloManual.ToLower() -replace "[^a-z0-9\s]", "" -replace "\s+", "-"
             $processedFirst = $true
         } else {
             $slug = Get-TopicName $messages
         }
-
         if ([string]::IsNullOrWhiteSpace($slug)) { $slug = "conversa-" + $file.BaseName.Substring(0,8) }
 
-        # Verifica se ja existe em alguma pasta de data
-        $existingFile = Get-ChildItem -Path $baseDir -Recurse -Filter ($slug + ".md") -ErrorAction SilentlyContinue | Select-Object -First 1
+        # Verifica se ja existe em qualquer pasta de data
+        $existingFile = Get-ChildItem -Path $baseDir -Recurse -Filter ($slug + ".md") -File -ErrorAction SilentlyContinue | Select-Object -First 1
+
         if ($existingFile) {
-            if ($file.LastWriteTime -le $existingFile.LastWriteTime) { $ignorados++; continue }
-            # Atualiza o arquivo existente no lugar onde ja esta
-            $outputFile = $existingFile.FullName
-        } else {
-            $outputFile = $outputDir + "\" + $slug + ".md"
+            # Se o jsonl nao mudou desde o ultimo save, ignora
+            if ($file.LastWriteTime -le $existingFile.LastWriteTime) {
+                $ignorados++
+                continue
+            }
+            # Remove o arquivo antigo
+            Remove-Item -Path $existingFile.FullName -Force
+            Write-Host ("Substituido: " + $existingFile.Name)
         }
+
+        # Salva sempre na pasta do dia atual
+        $outputFile = $outputDir + "\" + $slug + ".md"
 
         $date = ""
         if ($messages[0].Timestamp) { $date = ([DateTime]$messages[0].Timestamp).ToString("dd/MM/yyyy") }
@@ -119,7 +126,7 @@ foreach ($projectPath in $projectPaths) {
             [void]$md.AppendLine("---")
         }
         [System.IO.File]::WriteAllText($outputFile, $md.ToString(), [System.Text.Encoding]::UTF8)
-        Write-Host ("Salvo: " + (Split-Path $outputFile -Leaf))
+        Write-Host ("Salvo: " + $slug + ".md")
         $novos++
     }
 }
