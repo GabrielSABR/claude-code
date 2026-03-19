@@ -3959,3 +3959,13 @@ O fluxo é:
 
 Se não mandar o título, o arquivo é salvo com nome automático baseado nas palavras da conversa.
 ---
+
+## Gabriel
+"O outro chat ainda não foi salvo da maneira correta.
+
+Quero que sempre que eu rodar o salvar-e-enviar seja colocado dentro da pasta do dia respectivo"
+---
+
+## Claude
+Vou corrigir os dois pontos agora:
+---

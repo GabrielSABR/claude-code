@@ -4,7 +4,9 @@ $projectPaths = @(
     "C:\Users\alves\.claude\projects\C--Users-alves-OneDrive-Documentos-Claude-Code"
 )
 
-$outputDir = "C:\Users\alves\OneDrive\Documentos\Claude Code\conversas"
+$today = Get-Date -Format "yyyy-MM-dd"
+$baseDir = "C:\Users\alves\OneDrive\Documentos\Claude Code\conversas"
+$outputDir = $baseDir + "\" + $today
 if (-not (Test-Path $outputDir)) { New-Item -ItemType Directory -Path $outputDir | Out-Null }
 
 $tituloFile = "C:\Users\alves\OneDrive\Documentos\Claude Code\.titulo"
@@ -78,7 +80,6 @@ foreach ($projectPath in $projectPaths) {
         }
         if ($messages.Count -eq 0) { continue }
 
-        # Usa titulo manual para o arquivo mais recente, automatico para os demais
         if (-not $processedFirst -and $tituloManual -ne "") {
             $slug = $tituloManual.ToLower() -replace "[^a-z0-9\s]", "" -replace "\s+", "-"
             $processedFirst = $true
@@ -87,10 +88,15 @@ foreach ($projectPath in $projectPaths) {
         }
 
         if ([string]::IsNullOrWhiteSpace($slug)) { $slug = "conversa-" + $file.BaseName.Substring(0,8) }
-        $outputFile = $outputDir + "\" + $slug + ".md"
 
-        if (Test-Path $outputFile) {
-            if ($file.LastWriteTime -le (Get-Item $outputFile).LastWriteTime) { $ignorados++; continue }
+        # Verifica se ja existe em alguma pasta de data
+        $existingFile = Get-ChildItem -Path $baseDir -Recurse -Filter ($slug + ".md") -ErrorAction SilentlyContinue | Select-Object -First 1
+        if ($existingFile) {
+            if ($file.LastWriteTime -le $existingFile.LastWriteTime) { $ignorados++; continue }
+            # Atualiza o arquivo existente no lugar onde ja esta
+            $outputFile = $existingFile.FullName
+        } else {
+            $outputFile = $outputDir + "\" + $slug + ".md"
         }
 
         $date = ""
@@ -118,7 +124,6 @@ foreach ($projectPath in $projectPaths) {
     }
 }
 
-# Apaga o .titulo apos usar
 if (Test-Path $tituloFile) { Remove-Item $tituloFile }
 
 Write-Host ""
