@@ -7,12 +7,8 @@ echo.
 
 cd /d "C:\Users\alves\OneDrive\Documentos\Claude Code"
 
-:: Copia historico de conversas (pasta Documentos)
-if not exist "conversas" mkdir "conversas"
-xcopy /Y /Q "C:\Users\alves\.claude\projects\C--Users-alves-OneDrive-Documentos\*" "conversas\" 2>nul
-
-:: Copia historico de conversas (pasta Claude Code)
-xcopy /Y /Q "C:\Users\alves\.claude\projects\C--Users-alves-OneDrive-Documentos-Claude-Code\*" "conversas\" 2>nul
+:: Converte todas as conversas para markdown legivel
+powershell -ExecutionPolicy Bypass -File "%~dp0converter-conversas.ps1"
 
 git add .
 
