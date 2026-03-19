@@ -3969,3 +3969,29 @@ Quero que sempre que eu rodar o salvar-e-enviar seja colocado dentro da pasta do
 ## Claude
 Vou corrigir os dois pontos agora:
 ---
+
+## Claude
+Os arquivos já existem e estão atualizados, por isso não rodou. Vou mover os existentes para a pasta de data correta:
+---
+
+## Claude
+Ainda há arquivos na raiz. Vou movê-los:
+---
+
+## Claude
+Pronto! Agora está tudo organizado:
+
+```
+conversas/
+└── 2026-03-19/
+    ├── assistencia-e-solucoes-para-gestao-de-trafego.md
+    ├── lead-server-evento-meta-children.md
+    └── type-claude-description-string-code.md
+```
+
+A partir de agora, toda vez que rodar o `salvar-e-enviar.bat`, as conversas novas vão para a pasta do dia que rodou. Se uma conversa foi atualizada, ela fica na pasta onde já estava.
+---
+
+## Gabriel
+"Quero que rode com o nome que eu coloquei da maneira que você me explicou e sempre que eu atualizar e algum chat igual já esteja salvo, quero que você exclua ele e deixe somente o chat atualizado"
+---
