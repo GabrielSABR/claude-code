@@ -1,50 +1,44 @@
-# Converte arquivos .jsonl de conversas do Claude para .md legivel
-# Salva apenas conversas novas ou que foram atualizadas
-# Nome do arquivo baseado no tema geral da conversa
-
+﻿param()
 $projectPaths = @(
     "C:\Users\alves\.claude\projects\C--Users-alves-OneDrive-Documentos",
     "C:\Users\alves\.claude\projects\C--Users-alves-OneDrive-Documentos-Claude-Code"
 )
 
-$today = Get-Date -Format "yyyy-MM-dd"
-$baseDir = "C:\Users\alves\OneDrive\Documentos\Claude Code\conversas"
-$outputDir = $baseDir + "\" + $today
+$outputDir = "C:\Users\alves\OneDrive\Documentos\Claude Code\conversas"
 if (-not (Test-Path $outputDir)) { New-Item -ItemType Directory -Path $outputDir | Out-Null }
 
-# Palavras irrelevantes para ignorar no nome
-$stopWords = @("o","a","os","as","um","uma","que","de","da","do","dos","das","em","para","com",
-               "por","nao","eu","me","voce","como","isso","esse","esta","este","ser","ter","mas",
-               "se","na","no","nas","nos","foi","vai","ao","as","e","ou","ja","ate","mais","meu",
-               "minha","seus","suas","tem","sao","esta","aqui","la","isso","aquilo","quando",
-               "onde","quem","qual","quais","fazer","feito","faz","pode","quero","preciso",
-               "sempre","nunca","tudo","nada","muito","pouco","agora","depois","antes","ainda")
+$stopWords = @("o","a","os","as","um","uma","que","de","da","do","dos","das","em","para","com","por",
+    "nao","eu","me","voce","como","isso","esse","esta","este","ser","ter","mas","se","na",
+    "no","nas","nos","foi","vai","ao","e","ou","ja","ate","mais","meu","minha","seus","suas",
+    "tem","sao","aqui","la","aquilo","quando","onde","quem","qual","quais","fazer","feito",
+    "faz","pode","quero","preciso","sempre","nunca","tudo","nada","muito","pouco","agora",
+    "depois","antes","ainda","sim","bem","entao","tambem","so","cada","outro","outra",
+    "mesmo","mesma","todo","toda","todos","todas","sobre","esse","essa","esses","essas",
+    "the","and","for","with","from","that","this","have","will","are","were","been",
+    "has","had","not","but","what","which","when","where","who","all","would","could",
+    "should","their","there","they","them","than","then","into","also","just","any",
+    "your","our","get","got","can","use","new","one","two","way","may","out","up",
+    "do","did","so","if","he","she","we","it","is","in","on","at","to","of","an","be","by","as","or","no","my")
 
-function Get-TopicName($messages) {
-    # Pega texto das primeiras 5 mensagens do usuario
-    $userMessages = $messages | Where-Object { $_.Role -eq "user" } | Select-Object -First 5
-    $combined = ($userMessages | ForEach-Object { $_.Text }) -join " "
-
-    # Remove acentos
-    $normalized = $combined.Normalize([System.Text.NormalizationForm]::FormD)
+function Get-TopicName {
+    param($messages)
+    $allText = ($messages | ForEach-Object { $_.Text }) -join " "
+    $normalized = $allText.Normalize([System.Text.NormalizationForm]::FormD)
     $clean = -join ($normalized.ToCharArray() | Where-Object {
         [System.Globalization.CharUnicodeInfo]::GetUnicodeCategory($_) -ne [System.Globalization.UnicodeCategory]::NonSpacingMark
     })
-
-    # Limpa caracteres especiais e converte para minusculo
-    $clean = $clean.ToLower() -replace "[^\w\s]", " " -replace "\s+", " "
-
-    # Filtra palavras relevantes
-    $words = $clean.Split(" ") | Where-Object {
-        $_.Length -gt 3 -and $stopWords -notcontains $_
+    $clean = $clean -replace "https?://\S+", " "
+    $clean = $clean.ToLower() -replace "[^a-z0-9\s]", " " -replace "[0-9]+", " " -replace "\s+", " "
+    $wordCount = @{}
+    foreach ($word in $clean.Trim().Split(" ")) {
+        if ($word.Length -gt 3 -and $stopWords -notcontains $word) {
+            if ($wordCount.ContainsKey($word)) { $wordCount[$word]++ }
+            else { $wordCount[$word] = 1 }
+        }
     }
-
-    # Pega as 5 palavras mais relevantes (sem repeticao)
-    $unique = $words | Select-Object -Unique | Select-Object -First 5
-
-    $slug = $unique -join "-"
+    $topWords = $wordCount.GetEnumerator() | Sort-Object Value -Descending | Select-Object -First 5 | ForEach-Object { $_.Key }
+    $slug = $topWords -join "-"
     if ($slug.Length -gt 60) { $slug = $slug.Substring(0, 60).TrimEnd("-") }
-
     return $slug
 }
 
@@ -54,12 +48,10 @@ $ignorados = 0
 foreach ($projectPath in $projectPaths) {
     if (-not (Test-Path $projectPath)) { continue }
     $jsonlFiles = Get-ChildItem -Path $projectPath -Filter "*.jsonl"
-
     foreach ($file in $jsonlFiles) {
         $lines = Get-Content $file.FullName -Encoding UTF8
         $messages = @()
         $firstUserMessage = ""
-
         foreach ($line in $lines) {
             try {
                 $obj = $line | ConvertFrom-Json
@@ -70,40 +62,26 @@ foreach ($projectPath in $projectPaths) {
                 $text = ""
                 if ($content -is [string]) { $text = $content }
                 elseif ($content -is [array]) {
-                    foreach ($block in $content) {
-                        if ($block.type -eq "text") { $text += $block.text }
-                    }
+                    foreach ($block in $content) { if ($block.type -eq "text") { $text += $block.text } }
                 }
                 if ([string]::IsNullOrWhiteSpace($text)) { continue }
                 if ($role -eq "user" -and $firstUserMessage -eq "") { $firstUserMessage = $text }
                 $messages += [PSCustomObject]@{ Role = $role; Text = $text; Timestamp = $timestamp }
             } catch { continue }
         }
-
         if ($messages.Count -eq 0) { continue }
-
-        # Gera nome baseado no tema da conversa
         $topic = Get-TopicName $messages
-        if ([string]::IsNullOrWhiteSpace($topic)) {
-            $topic = "conversa-" + $file.BaseName.Substring(0, 8)
-        }
+        if ([string]::IsNullOrWhiteSpace($topic)) { $topic = "conversa-" + $file.BaseName.Substring(0,8) }
         $outputFile = $outputDir + "\" + $topic + ".md"
-
         if (Test-Path $outputFile) {
-            if ($file.LastWriteTime -le (Get-Item $outputFile).LastWriteTime) {
-                $ignorados++
-                continue
-            }
+            if ($file.LastWriteTime -le (Get-Item $outputFile).LastWriteTime) { $ignorados++; continue }
         }
-
         $date = ""
         if ($messages[0].Timestamp) { $date = ([DateTime]$messages[0].Timestamp).ToString("dd/MM/yyyy") }
-
         $md = [System.Text.StringBuilder]::new()
         [void]$md.AppendLine("# Conversa - " + $firstUserMessage)
         [void]$md.AppendLine("> Data: " + $date)
         [void]$md.AppendLine("---")
-
         foreach ($msg in $messages) {
             if ($msg.Role -eq "user") {
                 [void]$md.AppendLine("")
@@ -116,7 +94,6 @@ foreach ($projectPath in $projectPaths) {
             }
             [void]$md.AppendLine("---")
         }
-
         [System.IO.File]::WriteAllText($outputFile, $md.ToString(), [System.Text.Encoding]::UTF8)
         Write-Host ("Salvo: " + (Split-Path $outputFile -Leaf))
         $novos++
