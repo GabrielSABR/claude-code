@@ -3995,3 +3995,47 @@ A partir de agora, toda vez que rodar o `salvar-e-enviar.bat`, as conversas nova
 ## Gabriel
 "Quero que rode com o nome que eu coloquei da maneira que você me explicou e sempre que eu atualizar e algum chat igual já esteja salvo, quero que você exclua ele e deixe somente o chat atualizado"
 ---
+
+## Claude
+Pronto! Agora o comportamento é:
+
+| Situação | O que acontece |
+|----------|---------------|
+| Chat novo | Salva na pasta do dia atual |
+| Chat atualizado | **Apaga o antigo** e salva o novo na pasta do dia atual |
+| Chat sem mudanças | Ignora |
+| Título manual definido | Usa o nome que você enviou |
+---
+
+## Gabriel
+"Ainda não está sendo salvo com o nome da maneira certa."
+---
+
+## Claude
+O problema é que o script não sabe qual conversa associar ao título. Preciso salvar também o ID da sessão atual junto com o título. Deixa eu verificar o ID desta conversa:
+---
+
+## Claude
+O arquivo `2b26edc9` é esta conversa (a mais recente). Agora vou salvar o título com o ID da sessão para o script associar corretamente:
+---
+
+## Claude
+Agora atualizo o script para usar o session ID ao aplicar o título:
+---
+
+## Claude
+Agora está funcionando corretamente. O arquivo desta conversa foi salvo como `configuracao-github-e-claude-code.md`.
+
+**Como funciona agora:**
+- Quando você manda **"Salva com o título: X"** em qualquer conversa, eu salvo o título junto com o ID daquela sessão específica
+- O script identifica exatamente qual conversa precisa do título e nomeia corretamente
+- As outras conversas sem título continuam recebendo nomes automáticos
+---
+
+## Gabriel
+"Salva com o título: Assistência e soluções para gestão de tráfego"
+---
+
+## Claude
+Pronto! O título está vinculado ao outro chat. Da próxima vez que rodar o `salvar-e-enviar.bat`, ele vai ser salvo como `assistencia-e-solucoes-para-gestao-de-trafego.md`.
+---
