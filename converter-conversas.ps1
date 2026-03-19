@@ -11,8 +11,15 @@ if (-not (Test-Path $outputDir)) { New-Item -ItemType Directory -Path $outputDir
 
 $tituloFile = "C:\Users\alves\OneDrive\Documentos\Claude Code\.titulo"
 $tituloManual = ""
+$tituloSessionId = ""
 if (Test-Path $tituloFile) {
-    $tituloManual = (Get-Content $tituloFile -Encoding UTF8).Trim()
+    try {
+        $t = Get-Content $tituloFile -Encoding UTF8 | ConvertFrom-Json
+        $tituloManual = $t.titulo
+        $tituloSessionId = $t.sessionId
+    } catch {
+        $tituloManual = (Get-Content $tituloFile -Encoding UTF8).Trim()
+    }
 }
 
 $stopWords = @("o","a","os","as","um","uma","que","de","da","do","dos","das","em","para","com","por",
@@ -52,12 +59,12 @@ function Get-TopicName {
 
 $novos = 0
 $ignorados = 0
-$processedFirst = $false
 
 foreach ($projectPath in $projectPaths) {
     if (-not (Test-Path $projectPath)) { continue }
     $jsonlFiles = Get-ChildItem -Path $projectPath -Filter "*.jsonl" | Sort-Object LastWriteTime -Descending
     foreach ($file in $jsonlFiles) {
+        $sessionId = [System.IO.Path]::GetFileNameWithoutExtension($file.Name)
         $lines = Get-Content $file.FullName -Encoding UTF8
         $messages = @()
         $firstUserMessage = ""
@@ -80,32 +87,21 @@ foreach ($projectPath in $projectPaths) {
         }
         if ($messages.Count -eq 0) { continue }
 
-        # Define o slug do arquivo
-        if (-not $processedFirst -and $tituloManual -ne "") {
+        # Usa titulo manual se o sessionId bater, senao gera automatico
+        if ($tituloManual -ne "" -and $tituloSessionId -ne "" -and $sessionId -eq $tituloSessionId) {
             $slug = $tituloManual.ToLower() -replace "[^a-z0-9\s]", "" -replace "\s+", "-"
-            $processedFirst = $true
         } else {
             $slug = Get-TopicName $messages
         }
-        if ([string]::IsNullOrWhiteSpace($slug)) { $slug = "conversa-" + $file.BaseName.Substring(0,8) }
+        if ([string]::IsNullOrWhiteSpace($slug)) { $slug = "conversa-" + $sessionId.Substring(0,8) }
 
-        # Verifica se ja existe em qualquer pasta de data
         $existingFile = Get-ChildItem -Path $baseDir -Recurse -Filter ($slug + ".md") -File -ErrorAction SilentlyContinue | Select-Object -First 1
-
         if ($existingFile) {
-            # Se o jsonl nao mudou desde o ultimo save, ignora
-            if ($file.LastWriteTime -le $existingFile.LastWriteTime) {
-                $ignorados++
-                continue
-            }
-            # Remove o arquivo antigo
+            if ($file.LastWriteTime -le $existingFile.LastWriteTime) { $ignorados++; continue }
             Remove-Item -Path $existingFile.FullName -Force
-            Write-Host ("Substituido: " + $existingFile.Name)
         }
 
-        # Salva sempre na pasta do dia atual
         $outputFile = $outputDir + "\" + $slug + ".md"
-
         $date = ""
         if ($messages[0].Timestamp) { $date = ([DateTime]$messages[0].Timestamp).ToString("dd/MM/yyyy") }
 
