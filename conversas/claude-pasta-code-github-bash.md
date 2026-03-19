@@ -1798,3 +1798,75 @@ Pasta excluída. Agora vou reescrever o script com nomes inteligentes baseados n
 ## Claude
 O Write tool está causando problemas com caracteres especiais. Vou salvar via PowerShell diretamente:
 ---
+
+## Claude
+Pronto! Agora está tudo organizado:
+
+```
+Claude Code/
+└── conversas/
+    ├── claude-pasta-code-github-bash.md   ← nossa conversa de hoje
+    └── server-lead-meta-evento-event.md   ← outra conversa
+```
+
+O script agora analisa **toda a conversa** e pega as **5 palavras mais mencionadas** para criar o nome. Nossa conversa ficou `claude-pasta-code-github-bash` — que reflete bem os temas: Claude, pasta, GitHub, código e bash.
+
+O nome ainda não é perfeito porque é automático sem IA, mas já dá para entender o tema de cada conversa. Quer ajustar algum nome manualmente ou está bom assim?
+---
+
+## Gabriel
+"Não quero dessa forma, faz o seguinte sempre coloque o nome que aparece dentro do aplicativo da claude code
+
+Ex: " Traffic managemente assistance and solutions" e passe para o portugues.
+
+A ideia é pegar o título que o próprio claude code coloca e colocar no nome do arquivo nas minhas pastas."
+---
+
+## Claude
+Boa ideia! Deixa eu verificar se o título fica salvo dentro do arquivo .jsonl:
+---
+
+## Claude
+Vejo um campo `slug` no arquivo, mas não o título que aparece no app. Vou verificar nas pastas junto com os .jsonl:
+---
+
+## Claude
+Infelizmente o título que aparece no app fica armazenado num banco de dados interno do Claude (criptografado e bloqueado enquanto o app está aberto) — não dá para ler de fora.
+
+**Mas tenho uma solução prática:** ao terminar cada conversa, você me pede assim:
+
+> "Salva essa conversa com o título: Configuração GitHub e Claude Code"
+
+E eu escrevo o título num arquivo `.titulo` na pasta, que o script pega automaticamente para nomear o `.md`.
+
+Quer que eu configure esse fluxo? Ficaria assim:
+
+1. Termina a conversa
+2. Me fala: **"Salva com o título X"**
+3. Eu salvo o título
+4. Você clica em `salvar-e-enviar.bat` e o arquivo fica com o nome certo
+---
+
+## Gabriel
+"Beleza, vou fazer isso com o outro chat"
+---
+
+## Claude
+Perfeito! Quando quiser salvar, é só me mandar uma mensagem assim:
+
+> **"Salva com o título: [nome da conversa]"**
+
+Que eu crio o arquivo `.titulo` e o script usa ele automaticamente para nomear o `.md`.
+---
+
+## Gabriel
+"Salva com o título: Assistência e soluções para gestão de tráfego"
+---
+
+## Claude
+Agora preciso atualizar o script para usar esse arquivo quando existir. Vou fazer isso:
+---
+
+## Claude
+Perfeito. Agora vou atualizar o `converter-conversas.ps1` para usar o `.titulo` quando existir:
+---
