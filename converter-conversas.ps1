@@ -9,17 +9,24 @@ $baseDir = "C:\Users\alves\OneDrive\Documentos\Claude Code\conversas"
 $outputDir = $baseDir + "\" + $today
 if (-not (Test-Path $outputDir)) { New-Item -ItemType Directory -Path $outputDir | Out-Null }
 
-$tituloFile = "C:\Users\alves\OneDrive\Documentos\Claude Code\.titulo"
-$tituloManual = ""
-$tituloSessionId = ""
-if (Test-Path $tituloFile) {
+# Carrega mapeamento permanente de titulos
+$titulosFile = "C:\Users\alves\OneDrive\Documentos\Claude Code\titulos.json"
+$titulos = @{}
+if (Test-Path $titulosFile) {
+    $titulos = Get-Content $titulosFile -Encoding UTF8 | ConvertFrom-Json
+}
+
+# Carrega titulo avulso (.titulo) para adicionar ao mapeamento
+$tituloAvulsoFile = "C:\Users\alves\OneDrive\Documentos\Claude Code\.titulo"
+if (Test-Path $tituloAvulsoFile) {
     try {
-        $t = Get-Content $tituloFile -Encoding UTF8 | ConvertFrom-Json
-        $tituloManual = $t.titulo
-        $tituloSessionId = $t.sessionId
-    } catch {
-        $tituloManual = (Get-Content $tituloFile -Encoding UTF8).Trim()
-    }
+        $t = Get-Content $tituloAvulsoFile -Encoding UTF8 | ConvertFrom-Json
+        if ($t.sessionId -and $t.titulo) {
+            $titulos | Add-Member -NotePropertyName $t.sessionId -NotePropertyValue $t.titulo -Force
+            $titulos | ConvertTo-Json | Out-File -FilePath $titulosFile -Encoding UTF8
+        }
+    } catch {}
+    Remove-Item $tituloAvulsoFile -Force
 }
 
 $stopWords = @("o","a","os","as","um","uma","que","de","da","do","dos","das","em","para","com","por",
@@ -87,9 +94,9 @@ foreach ($projectPath in $projectPaths) {
         }
         if ($messages.Count -eq 0) { continue }
 
-        # Usa titulo manual se o sessionId bater, senao gera automatico
-        if ($tituloManual -ne "" -and $tituloSessionId -ne "" -and $sessionId -eq $tituloSessionId) {
-            $slug = $tituloManual.ToLower() -replace "[^a-z0-9\s]", "" -replace "\s+", "-"
+        # Usa titulo do mapeamento se existir, senao gera automatico
+        if ($titulos.$sessionId) {
+            $slug = $titulos.$sessionId.ToLower() -replace "[^a-z0-9\s]", "" -replace "\s+", "-"
         } else {
             $slug = Get-TopicName $messages
         }
@@ -126,8 +133,6 @@ foreach ($projectPath in $projectPaths) {
         $novos++
     }
 }
-
-if (Test-Path $tituloFile) { Remove-Item $tituloFile }
 
 Write-Host ""
 if ($novos -eq 0) { Write-Host "Nenhuma conversa nova ou atualizada." }

@@ -4039,3 +4039,19 @@ Agora está funcionando corretamente. O arquivo desta conversa foi salvo como `c
 ## Claude
 Pronto! O título está vinculado ao outro chat. Da próxima vez que rodar o `salvar-e-enviar.bat`, ele vai ser salvo como `assistencia-e-solucoes-para-gestao-de-trafego.md`.
 ---
+
+## Gabriel
+"Estou rodando o salvar-e-enviar e não está indo da maneira certa ainda os nomes de todos os chats que eu tenho"
+---
+
+## Claude
+Deixa eu rodar o script e ver o que está acontecendo:
+---
+
+## Claude
+O problema está na raiz. O arquivo `.titulo` é apagado depois de usar, então na próxima execução os nomes automáticos voltam. Vou resolver isso criando um mapeamento permanente de sessão → título:
+---
+
+## Claude
+Agora atualizo o script para usar esse mapeamento permanente e apago os arquivos com nomes errados:
+---
