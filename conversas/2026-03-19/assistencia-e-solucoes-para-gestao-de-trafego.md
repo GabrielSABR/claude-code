@@ -4112,3 +4112,11 @@ conversas/2026-03-19/
 
 Mas percebo que **esta conversa** (sobre GitHub + Claude Code) ainda não está sendo capturada — ela está sendo aberta a partir da pasta `Documentos`, não da pasta `Claude Code`. Quando você usar o `abrir-claude.bat` nas próximas sessões, ela será capturada corretamente.
 ---
+
+## Gabriel
+"Eu criei um novo chat e coloquei um título nele e não salvou com o título que eu coloquei"
+---
+
+## Claude
+Encontrei! O título do novo chat é **"Estude o material do curso para aprimorar seu conhecimento"**, mas ele não foi salvo no `titulos.json`. Vou corrigir:
+---
