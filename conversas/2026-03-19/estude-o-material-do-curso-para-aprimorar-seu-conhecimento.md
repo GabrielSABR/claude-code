@@ -32,3 +32,11 @@ Como é o curso? Qual formato ele tem?
 ## Claude
 Salvo. Pode compartilhar o acesso ao curso quando quiser.
 ---
+
+## Gabriel
+"Salva o título como: Estude o material do curso para aprimorar seu conhecimento"
+---
+
+## Claude
+Título atualizado para "Estude o material do curso para aprimorar seu conhecimento". Pode compartilhar o material quando quiser.
+---

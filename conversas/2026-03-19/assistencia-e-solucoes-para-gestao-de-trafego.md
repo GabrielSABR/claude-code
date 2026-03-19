@@ -4120,3 +4120,51 @@ Mas percebo que **esta conversa** (sobre GitHub + Claude Code) ainda não está 
 ## Claude
 Encontrei! O título do novo chat é **"Estude o material do curso para aprimorar seu conhecimento"**, mas ele não foi salvo no `titulos.json`. Vou corrigir:
 ---
+
+## Claude
+Feito! Agora está correto:
+
+```
+conversas/2026-03-19/
+├── assistencia-e-solucoes-para-gestao-de-trafego.md
+├── documento-de-estrategia-de-lancamento-do-seminario-de-estudos.md
+└── estude-o-material-do-curso-para-aprimorar-seu-conhecimento.md
+```
+
+**O problema que aconteceu:** quando você disse o título no outro chat, ele foi salvo na memória do Claude, mas não no `titulos.json` que o script usa. 
+
+**Solução:** quando você disser "Salva o título como: X" em qualquer chat, precisa me mandar a mesma mensagem **neste chat também**, para eu registrar no `titulos.json`. Quer que eu crie uma forma mais automática para isso?
+---
+
+## Gabriel
+"Me explique como ficaria essa forma mais automática. 
+
+A minha ideia é toda vez que eu mandar no chat novo: " Salva o título como: [título que eu colocar]"
+---
+
+## Claude
+A ideia é usar os **hooks do Claude Code** — são scripts que rodam automaticamente em momentos específicos, como toda vez que o Claude termina de responder.
+
+Funcionaria assim:
+
+---
+
+**Fluxo automático:**
+
+1. Você abre qualquer chat novo
+2. Diz: `Salva o título como: Campanhas Meta Ads`
+3. O Claude responde normalmente
+4. **Automaticamente**, um script verifica se a mensagem continha `Salva o título como:` e registra o título + ID da sessão no `titulos.json`
+5. Na próxima vez que rodar `salvar-e-enviar.bat`, o arquivo já sai com o nome certo
+
+---
+
+**Vantagem:** você não precisa repetir o título em nenhum outro chat. Qualquer sessão onde você disser essa frase, ela é capturada.
+
+---
+
+Quer que eu configure isso agora? Seria um hook do tipo `Stop` (roda quando o Claude para de responder) que:
+- Lê as mensagens da sessão atual
+- Detecta se tem `Salva o título como:`
+- Salva automaticamente no `titulos.json`
+---
