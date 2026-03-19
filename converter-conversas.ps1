@@ -1,4 +1,5 @@
 # Converte arquivos .jsonl de conversas do Claude para .md legivel
+# Salva apenas conversas novas ou que foram atualizadas
 
 $projectPaths = @(
     "C:\Users\alves\.claude\projects\C--Users-alves-OneDrive-Documentos",
@@ -7,6 +8,9 @@ $projectPaths = @(
 
 $outputDir = "C:\Users\alves\OneDrive\Documentos\Claude Code\conversas"
 if (-not (Test-Path $outputDir)) { New-Item -ItemType Directory -Path $outputDir | Out-Null }
+
+$novos = 0
+$ignorados = 0
 
 foreach ($projectPath in $projectPaths) {
     if (-not (Test-Path $projectPath)) { continue }
@@ -27,23 +31,17 @@ foreach ($projectPath in $projectPaths) {
                 $content = $obj.message.content
                 $timestamp = $obj.timestamp
 
-                # Extrai texto do conteudo (pode ser string ou array)
                 $text = ""
                 if ($content -is [string]) {
                     $text = $content
                 } elseif ($content -is [array]) {
                     foreach ($block in $content) {
-                        if ($block.type -eq "text") {
-                            $text += $block.text
-                        }
+                        if ($block.type -eq "text") { $text += $block.text }
                     }
                 }
 
                 if ([string]::IsNullOrWhiteSpace($text)) { continue }
-
-                if ($role -eq "user" -and $firstUserMessage -eq "") {
-                    $firstUserMessage = $text
-                }
+                if ($role -eq "user" -and $firstUserMessage -eq "") { $firstUserMessage = $text }
 
                 $messages += [PSCustomObject]@{ Role = $role; Text = $text; Timestamp = $timestamp }
             } catch { continue }
@@ -51,10 +49,21 @@ foreach ($projectPath in $projectPaths) {
 
         if ($messages.Count -eq 0) { continue }
 
-        # Gera nome do arquivo baseado na primeira mensagem do usuario
+        # Gera nome do arquivo
         $topicRaw = $firstUserMessage -replace '[^\w\s]', '' -replace '\s+', '-'
         $topic = $topicRaw.ToLower().Substring(0, [Math]::Min(50, $topicRaw.Length)).TrimEnd('-')
         $outputFile = Join-Path $outputDir "$topic.md"
+
+        # Verifica se ja existe e se o .jsonl foi modificado depois do .md
+        if (Test-Path $outputFile) {
+            $jsonlModified = $file.LastWriteTime
+            $mdModified = (Get-Item $outputFile).LastWriteTime
+
+            if ($jsonlModified -le $mdModified) {
+                $ignorados++
+                continue
+            }
+        }
 
         # Pega data da primeira mensagem
         $date = ""
@@ -79,9 +88,14 @@ foreach ($projectPath in $projectPaths) {
         }
 
         $md | Out-File -FilePath $outputFile -Encoding UTF8
-        Write-Host "Salvo: $outputFile"
+        Write-Host "Salvo: $(Split-Path $outputFile -Leaf)"
+        $novos++
     }
 }
 
 Write-Host ""
-Write-Host "Conversas convertidas com sucesso!"
+if ($novos -eq 0) {
+    Write-Host "Nenhuma conversa nova ou atualizada."
+} else {
+    Write-Host "$novos conversa(s) salva(s). $ignorados ignorada(s) por nao terem mudancas."
+}
