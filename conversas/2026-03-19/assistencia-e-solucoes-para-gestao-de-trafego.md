@@ -4100,3 +4100,15 @@ Confirmado — os títulos estavam trocados. Vou corrigir agora:
 - `2b26edc9` = **Gestão de tráfego** (primeira mensagem sobre tráfego)
 - `b3d367c7` = **Outra conversa** (sobre Google Docs / seminário)
 ---
+
+## Claude
+Corrigido! Agora está assim:
+
+```
+conversas/2026-03-19/
+├── assistencia-e-solucoes-para-gestao-de-trafego.md
+└── documento-de-estrategia-de-lancamento-do-seminario-de-estudos.md
+```
+
+Mas percebo que **esta conversa** (sobre GitHub + Claude Code) ainda não está sendo capturada — ela está sendo aberta a partir da pasta `Documentos`, não da pasta `Claude Code`. Quando você usar o `abrir-claude.bat` nas próximas sessões, ela será capturada corretamente.
+---
