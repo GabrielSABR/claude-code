@@ -7,6 +7,12 @@ $projectPaths = @(
 $outputDir = "C:\Users\alves\OneDrive\Documentos\Claude Code\conversas"
 if (-not (Test-Path $outputDir)) { New-Item -ItemType Directory -Path $outputDir | Out-Null }
 
+$tituloFile = "C:\Users\alves\OneDrive\Documentos\Claude Code\.titulo"
+$tituloManual = ""
+if (Test-Path $tituloFile) {
+    $tituloManual = (Get-Content $tituloFile -Encoding UTF8).Trim()
+}
+
 $stopWords = @("o","a","os","as","um","uma","que","de","da","do","dos","das","em","para","com","por",
     "nao","eu","me","voce","como","isso","esse","esta","este","ser","ter","mas","se","na",
     "no","nas","nos","foi","vai","ao","e","ou","ja","ate","mais","meu","minha","seus","suas",
@@ -44,10 +50,11 @@ function Get-TopicName {
 
 $novos = 0
 $ignorados = 0
+$processedFirst = $false
 
 foreach ($projectPath in $projectPaths) {
     if (-not (Test-Path $projectPath)) { continue }
-    $jsonlFiles = Get-ChildItem -Path $projectPath -Filter "*.jsonl"
+    $jsonlFiles = Get-ChildItem -Path $projectPath -Filter "*.jsonl" | Sort-Object LastWriteTime -Descending
     foreach ($file in $jsonlFiles) {
         $lines = Get-Content $file.FullName -Encoding UTF8
         $messages = @()
@@ -70,14 +77,25 @@ foreach ($projectPath in $projectPaths) {
             } catch { continue }
         }
         if ($messages.Count -eq 0) { continue }
-        $topic = Get-TopicName $messages
-        if ([string]::IsNullOrWhiteSpace($topic)) { $topic = "conversa-" + $file.BaseName.Substring(0,8) }
-        $outputFile = $outputDir + "\" + $topic + ".md"
+
+        # Usa titulo manual para o arquivo mais recente, automatico para os demais
+        if (-not $processedFirst -and $tituloManual -ne "") {
+            $slug = $tituloManual.ToLower() -replace "[^a-z0-9\s]", "" -replace "\s+", "-"
+            $processedFirst = $true
+        } else {
+            $slug = Get-TopicName $messages
+        }
+
+        if ([string]::IsNullOrWhiteSpace($slug)) { $slug = "conversa-" + $file.BaseName.Substring(0,8) }
+        $outputFile = $outputDir + "\" + $slug + ".md"
+
         if (Test-Path $outputFile) {
             if ($file.LastWriteTime -le (Get-Item $outputFile).LastWriteTime) { $ignorados++; continue }
         }
+
         $date = ""
         if ($messages[0].Timestamp) { $date = ([DateTime]$messages[0].Timestamp).ToString("dd/MM/yyyy") }
+
         $md = [System.Text.StringBuilder]::new()
         [void]$md.AppendLine("# Conversa - " + $firstUserMessage)
         [void]$md.AppendLine("> Data: " + $date)
@@ -99,6 +117,9 @@ foreach ($projectPath in $projectPaths) {
         $novos++
     }
 }
+
+# Apaga o .titulo apos usar
+if (Test-Path $tituloFile) { Remove-Item $tituloFile }
 
 Write-Host ""
 if ($novos -eq 0) { Write-Host "Nenhuma conversa nova ou atualizada." }

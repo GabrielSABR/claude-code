@@ -524,7 +524,3 @@ O arquivo já está salvo direto na sua pasta **Downloads** com o nome:
 
 É o mesmo local onde estava o original. Pode importar no GTM agora — o erro do `x-gcm-evd` não vai aparecer mais.
 ---
-
-## Gabriel
-"Salva com o título: Documento de estratégia de lançamento do seminário de estudos"
----
