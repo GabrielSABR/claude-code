@@ -5,7 +5,7 @@ echo   Salvando tudo na pasta...
 echo ========================================
 echo.
 
-cd /d "C:\Users\alves\OneDrive\Documentos\Claude Code"
+cd /d "%~dp0"
 
 :: Converte todas as conversas para markdown legivel
 powershell -ExecutionPolicy Bypass -File "%~dp0converter-conversas.ps1"
