@@ -1,0 +1,117 @@
+Crie uma campanha completa no Meta Ads Manager usando a API do Meta (v22.0).
+Siga exatamente as configurações abaixo e respeite todas as regras obrigatórias.
+
+REGRAS OBRIGATÓRIAS:
+- Criar tudo em status PAUSED (rascunho — nunca publicar)
+- Advantage+ Audience: DESLIGADO em todos os conjuntos (targeting_automation: {"advantage_audience": 0})
+- Direcionamento detalhado: para cada interesse informado, buscar na API (/search?type=adinterest&q={nome}) e aplicar via flexible_spec. Listar os não encontrados e continuar a criação normalmente
+- Executar todas as chamadas via curl no Bash
+- Fluxo obrigatório por anúncio:
+  1. Criar campanha → salvar campaign_id
+  2. Criar conjunto → salvar adset_id (vinculado ao campaign_id)
+  3. Criar creative com asset_feed_spec → salvar creative_id
+  4. Criar anúncio → vincular adset_id + creative_id no mesmo POST
+- Cada anúncio deve ser criado dentro do seu respectivo conjunto
+- Criativos em vídeo com múltiplos formatos: usar asset_feed_spec com asset_customization_rules
+  - Vídeo Feed → facebook_positions: ["feed"] + instagram_positions: ["stream"]
+  - Vídeo Wide → facebook_positions: ["instream_video"]
+  - Vídeo Stories → facebook_positions: ["story"] + instagram_positions: ["story", "reels"]
+  - Se algum formato não estiver preenchido: criar o creative apenas com os formatos disponíveis, sem substituir por outro vídeo
+- Retornar relatório final com todos os IDs criados
+
+=== ACESSO ===
+Token       :
+ID da conta :
+
+=== CAMPANHA ===
+Nome      :
+Objetivo  : [ ] Tráfego  [ ] Leads  [ ] Vendas  [ ] Engajamento
+Orçamento : [ ] Por campanha (CBO)  [ ] Por conjunto (ABO)
+
+=== CONJUNTO 1 ===
+Nome        :
+Destino     : [ ] Site  [ ] WhatsApp  [ ] Instagram  [ ] Messenger
+Meta        : [ ] Cliques no link  [ ] Visualizações de página
+Pixel       :
+Evento      : [ ] Lead  [ ] Purchase  [ ] ViewContent  [ ] CompleteRegistration
+Orçamento   : R$ ___ por dia
+Período     : de ___/___/______  até ___/___/______
+Localização :
+Idade       : ___ a ___
+Gênero      : [ ] Todos  [ ] Masculino  [ ] Feminino
+Excluir     :
+Interesses  :
+---
+(cole os interesses aqui, um por linha)
+---
+
+--- ANÚNCIO 1.1 (Conjunto 1) ---
+Nome            :
+Página FB       :
+Instagram       :
+Título          :
+Descrição       :
+CTA             : [ ] Saiba mais  [ ] Comprar  [ ] Cadastre-se  [ ] Fale conosco
+Link            :
+UTMs            : utm_source=&utm_medium=&utm_campaign=&utm_content=&utm_term=
+WhatsApp        : [ ] Sim  [ ] Não
+Vídeo Feed      : (nome ou ID — formato 4:5)
+Vídeo Wide      : (nome ou ID — formato 16:9)
+Vídeo Stories   : (nome ou ID — formato 9:16)
+Texto do anúncio:
+---
+(texto aqui)
+---
+
+--- ANÚNCIO 1.2 (Conjunto 1) ---
+Nome            :
+Página FB       :
+Instagram       :
+Título          :
+Descrição       :
+CTA             : [ ] Saiba mais  [ ] Comprar  [ ] Cadastre-se  [ ] Fale conosco
+Link            :
+UTMs            : utm_source=&utm_medium=&utm_campaign=&utm_content=&utm_term=
+WhatsApp        : [ ] Sim  [ ] Não
+Vídeo Feed      : (nome ou ID — formato 4:5)
+Vídeo Wide      : (nome ou ID — formato 16:9)
+Vídeo Stories   : (nome ou ID — formato 9:16)
+Texto do anúncio:
+---
+(texto aqui)
+---
+
+=== CONJUNTO 2 ===
+Nome        :
+Destino     : [ ] Site  [ ] WhatsApp  [ ] Instagram  [ ] Messenger
+Meta        : [ ] Cliques no link  [ ] Visualizações de página
+Pixel       :
+Evento      : [ ] Lead  [ ] Purchase  [ ] ViewContent  [ ] CompleteRegistration
+Orçamento   : R$ ___ por dia
+Período     : de ___/___/______  até ___/___/______
+Localização :
+Idade       : ___ a ___
+Gênero      : [ ] Todos  [ ] Masculino  [ ] Feminino
+Excluir     :
+Interesses  :
+---
+(cole os interesses aqui, um por linha)
+---
+
+--- ANÚNCIO 2.1 (Conjunto 2) ---
+Nome            :
+Página FB       :
+Instagram       :
+Título          :
+Descrição       :
+CTA             : [ ] Saiba mais  [ ] Comprar  [ ] Cadastre-se  [ ] Fale conosco
+Link            :
+UTMs            : utm_source=&utm_medium=&utm_campaign=&utm_content=&utm_term=
+WhatsApp        : [ ] Sim  [ ] Não
+Vídeo Feed      : (nome ou ID — formato 4:5)
+Vídeo Wide      : (nome ou ID — formato 16:9)
+Vídeo Stories   : (nome ou ID — formato 9:16)
+Texto do anúncio:
+---
+(texto aqui)
+---
