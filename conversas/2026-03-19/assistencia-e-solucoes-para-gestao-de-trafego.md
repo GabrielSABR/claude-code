@@ -6234,3 +6234,40 @@ O hook vai rodar automaticamente após cada resposta e:
 
 **Você não precisa mais fazer nada extra** — funciona em qualquer chat automaticamente a partir de agora.
 ---
+
+## Gabriel
+"Ok! Quero que toda vez que o Claude Code for aberto rode automaticamente o abri-claude"
+---
+
+## Claude
+O `abrir-claude.bat` roda o `claude` no final, então não posso chamá-lo dentro do hook — causaria um loop. O que faz sentido automatizar no `SessionStart` é o `git pull`, que é a parte mais importante.
+
+Vou:
+1. Atualizar o `abrir-claude.bat` para incluir `git pull` antes de abrir
+2. Adicionar um `SessionStart` hook que roda o `git pull` automaticamente
+---
+
+## Claude
+Agora adiciono o `SessionStart` hook no `settings.json`:
+---
+
+## Claude
+Pronto! Agora funciona assim automaticamente:
+
+---
+
+## O que acontece agora
+
+**Ao abrir pelo `abrir-claude.bat`:**
+1. Vai para a pasta correta
+2. Roda `git pull` — baixa atualizações do GitHub
+3. Abre o Claude Code
+
+**Ao iniciar qualquer sessão nova (SessionStart hook):**
+- Roda `git pull` automaticamente em segundo plano
+- Você verá a mensagem **"Sincronizando com GitHub..."** no spinner
+
+**Ao fechar qualquer sessão (Stop hook):**
+- Detecta título se você enviou `Salva o título como:`
+- Salva a conversa em arquivo `.md`
+---
