@@ -17,3 +17,11 @@ Olá! Tudo funcionando por aqui. Como posso ajudar?
 ## Claude
 Salvo com o título "Chat teste" na memória.
 ---
+
+## Gabriel
+"Salva o título como: Chat teste"
+---
+
+## Claude
+O título já está salvo como "Chat teste" no arquivo `chat_teste.md`. Nenhuma alteração necessária.
+---
