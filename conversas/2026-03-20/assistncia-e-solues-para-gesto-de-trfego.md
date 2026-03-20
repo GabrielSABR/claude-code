@@ -6291,3 +6291,18 @@ O script funcionou, mas pegou uma mensagem errada — ele precisa ser mais preci
 ## Claude
 Funcionando! Agora vou rodar o converter e enviar tudo ao GitHub:
 ---
+
+## Claude
+Pronto! Agora está funcionando. Resumo do que foi corrigido:
+
+**Problema:** o script estava pegando qualquer mensagem que continha "Salva o título como:" — inclusive mensagens técnicas internas do Claude.
+
+**Solução:** o regex agora só captura quando a mensagem **começa** com essa frase — ou seja, só quando você digita diretamente.
+
+---
+
+**Como usar em qualquer chat:**
+1. Antes de fechar, escreva: `Salva o título como: Nome do Chat`
+2. O hook detecta automaticamente ao terminar a sessão
+3. Na próxima vez que rodar `salvar-e-enviar.bat`, o arquivo sai com o nome certo
+---
