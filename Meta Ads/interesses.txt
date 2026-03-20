@@ -1,0 +1,11 @@
+# Cole aqui os interesses que aparecem no Google / Meta Ads Manager
+# Um por linha — o script vai buscar cada um na API e aplicar no conjunto
+# Linhas começando com # são ignoradas
+#
+# Exemplos:
+# Previdência privada
+# Planejamento financeiro
+# Investimentos
+# Aposentadoria
+# Seguro de vida
+
