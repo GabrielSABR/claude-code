@@ -1,23 +1,30 @@
 ﻿param()
-$projectPaths = @(
-    "C:\Users\alves\.claude\projects\C--Users-alves-OneDrive-Documentos",
-    "C:\Users\alves\.claude\projects\C--Users-alves-OneDrive-Documentos-Claude-Code"
-)
+
+# Detecta automaticamente o usuario e o diretorio do script
+$userProfile = $env:USERPROFILE
+$scriptDir = $PSScriptRoot
+
+# Busca todas as pastas de projetos do Claude Code do usuario atual
+$claudeProjectsBase = Join-Path $userProfile ".claude\projects"
+$projectPaths = @()
+if (Test-Path $claudeProjectsBase) {
+    $projectPaths = Get-ChildItem -Path $claudeProjectsBase -Directory | Select-Object -ExpandProperty FullName
+}
 
 $today = Get-Date -Format "yyyy-MM-dd"
-$baseDir = "C:\Users\alves\OneDrive\Documentos\Claude Code\conversas"
-$outputDir = $baseDir + "\" + $today
+$baseDir = Join-Path $scriptDir "conversas"
+$outputDir = Join-Path $baseDir $today
 if (-not (Test-Path $outputDir)) { New-Item -ItemType Directory -Path $outputDir | Out-Null }
 
 # Carrega mapeamento permanente de titulos
-$titulosFile = "C:\Users\alves\OneDrive\Documentos\Claude Code\titulos.json"
+$titulosFile = Join-Path $scriptDir "titulos.json"
 $titulos = @{}
 if (Test-Path $titulosFile) {
     $titulos = Get-Content $titulosFile -Encoding UTF8 | ConvertFrom-Json
 }
 
 # Carrega titulo avulso (.titulo) para adicionar ao mapeamento
-$tituloAvulsoFile = "C:\Users\alves\OneDrive\Documentos\Claude Code\.titulo"
+$tituloAvulsoFile = Join-Path $scriptDir ".titulo"
 if (Test-Path $tituloAvulsoFile) {
     try {
         $t = Get-Content $tituloAvulsoFile -Encoding UTF8 | ConvertFrom-Json
