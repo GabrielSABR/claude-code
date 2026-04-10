@@ -11,7 +11,7 @@
 
 ## Identidade e Proposta de Valor
 
-Nome: *(a preencher — qual é o nome do CEO/responsável?)*
+Nome: Gabriel Alves
 Título: CEO da ALVSYS
 Área de Atuação: Empresários brasileiros nos EUA que precisam de um sistema completo de presença digital e aquisição de clientes.
 
@@ -27,37 +27,30 @@ O que oferece que a maioria não oferece:
 4. **Estratégia de avaliações 5 estrelas** no Google Maps — autoridade orgânica sem custo por clique
 5. **Landing Pages em inglês com design americano** — copy e CTA adaptados para o mercado norte-americano
 
-Credenciais Essenciais:
-*(a preencher — ex: anos de experiência, volume gerenciado em USD, certificações)*
+Credenciais Essenciais (1–3):
+- Mais de 3 anos de experiência em tráfego pago
+- Mais de R$ 5 milhões gerenciados em investimento
+- Certificações Google e Meta Ads
 
 Contexto do negócio:
 
 - Mercado/indústria: marketing digital (performance), foco no mercado norte-americano atendendo brasileiros nos EUA
 - Nichos: Construção, Limpeza Residencial (House Cleaning) e Beleza
 - Oferta principal: sistema completo de presença digital — Landing Page + Google Meu Negócio + Tráfego Pago (Meta Ads, Google Ads e/ou LSA)
-- Ticket médio: *(a preencher — qual é o ticket médio por cliente?)*
+- Ticket médio: depende do serviço selecionado pelo cliente (da porta de entrada em US$ 797 — Landing Page — até os recorrentes de topo em US$ 1.897/mês — Tráfego Pago + Funil Ultra). Ver [Escada de Valor](../comercial/escada-de-valor.md).
 - Regiões prioritárias: Massachusetts (Boston), Flórida (Orlando, Miami), Nova York (NYC)
-- Aquisição de clientes: *(a preencher — como você chega nos seus clientes? prospecção ativa, indicação, tráfego próprio?)*
+- Aquisição de clientes: prospecção direta + tráfego pago próprio
 
 Posicionamento:
 
-*(a preencher — como você quer ser percebido? Especializado? Premium? Acessível? Seletivo?)*
+- **Empresa de respeito e super parceira dos clientes** — tratamos o negócio do cliente como se fosse o nosso
+- Alinhado ao código de cultura: *"Cuidamos do dinheiro do cliente como se fosse nosso"* e *"Buscamos parcerias de longo prazo"*
+- Seletivo, focado em parceria de longo prazo, não em volume
 
 Missão / filosofia:
 
-*(a preencher — qual é a missão da Alvsys em uma frase? O que move o negócio além do lucro?)*
+> **Ajudar o máximo de empresários a ter um ótimo marketing em suas empresas para terem a maior previsibilidade no negócio deles.**
 
----
-
-## Campos em aberto
-
-Para completar esta página, preciso que você responda:
-
-| Campo | Pergunta |
-|-------|----------|
-| **Nome** | Qual é o nome do CEO/fundador? |
-| **Credenciais** | Há quanto tempo no mercado? Quanto já gerenciou em USD? Tem certificações? |
-| **Ticket médio** | Qual é o valor médio que um cliente paga por mês para a Alvsys? |
-| **Aquisição** | Como você encontra seus clientes hoje? |
-| **Posicionamento** | Em uma linha: como quer ser percebido no mercado? |
-| **Missão** | Qual é a missão da Alvsys em uma frase? |
+- **Tráfego serve o comercial**: o objetivo final é reunião, venda e previsibilidade, não métrica de vaidade
+- **Transparência total**: o que foi feito, por que foi feito e o que os dados dizem sobre o próximo passo
+- **Parceria de verdade**: código de cultura aplicado — *Todo cliente importa* e *Gerar resultado, custe o que custar*
