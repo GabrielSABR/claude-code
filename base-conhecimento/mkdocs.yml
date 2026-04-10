@@ -1,6 +1,6 @@
-site_name: Base de Conhecimento da Agência
-site_description: Documentação interna da agência
-site_author: Equipe da Agência
+site_name: Alvsys - Base de Conhecimento
+site_description: Base de conhecimento interna da Alvsys
+site_author: Equipe Alvsys
 docs_dir: docs
 site_dir: site
 
@@ -68,10 +68,15 @@ markdown_extensions:
 
 nav:
   - Início: index.md
+  - Sobre a Alvsys:
+      - sobre/index.md
+      - Código de Cultura: sobre/cultura.md
+      - Mercado e Nichos: sobre/mercado.md
   - Serviços:
       - servicos/index.md
       - Site / Landing Page: servicos/site-landing-page.md
       - Google Business Profile: servicos/google-business-profile.md
+      - Social Media: servicos/social-media.md
       - Tráfego Pago:
           - servicos/trafego-pago/index.md
           - Meta Ads: servicos/trafego-pago/meta-ads.md
@@ -80,6 +85,10 @@ nav:
       - Funil de Vendas: servicos/funil-de-vendas.md
       - Sistemas e Automações: servicos/sistemas/index.md
       - Consultorias: servicos/consultorias.md
+  - Comercial:
+      - comercial/index.md
+      - Escada de Valor e Preços: comercial/escada-de-valor.md
+      - Playbook de Objeções: comercial/playbook-objecoes.md
   - Processos Internos:
       - processos/index.md
   - Clientes e Cases:
@@ -90,4 +99,4 @@ nav:
 extra:
   generator: false
 
-copyright: Copyright &copy; 2026 - Sua Agência
+copyright: Copyright &copy; 2026 - Alvsys

@@ -1,44 +1,56 @@
 # Local Service Ads (LSA)
 
-!!! info "Página a ser preenchida"
-    Este é um esqueleto. Preencha com a forma como a agência opera com LSA.
+## Como funciona
 
-## O que é
+É o selo **"Protegido pelo Google"** (*Google Guaranteed*). Aparece **no topo de tudo**, **acima até dos anúncios comuns do Google Ads**.
 
-<!-- Breve explicação do que é LSA e pra quem serve. -->
+## Diferencial
+
+Diferente do Google Ads tradicional, no LSA **você não paga por clique — paga por Lead** (contato real).
+
+É **extremamente confiável** para o mercado americano e europeu, porque o **Google verifica a documentação da empresa antes de liberar** a veiculação. Quando o cliente vê o selo, ele sabe que aquela empresa passou por um processo de validação oficial do Google.
+
+## Por que o LSA é estratégico para a Alvsys
+
+- **Mercado americano**: o selo Google Guaranteed tem peso alto na decisão de compra do consumidor americano
+- **Nichos-foco da Alvsys**: Construção, Limpeza Residencial e Beleza são categorias **elegíveis para LSA**
+- **Geolocalização**: perfeito para atender a comunidade brasileira nas regiões prioritárias (MA, FL, NY, etc.)
+- **Paga por lead**: o cliente vê valor direto, sem se preocupar com CPC ou CTR
 
 ## Requisitos de elegibilidade
 
-<!-- O cliente precisa ter o quê? (licenças, seguros, verificação Google Screened, etc.) -->
+!!! info "A preencher"
+    Documentar os requisitos para o cliente entrar no LSA:
 
--
--
--
+    - Categorias de negócio elegíveis
+    - Documentos necessários (licenças, seguros, verificação de background)
+    - Processo de verificação Google Screened / Google Guaranteed
+    - Prazo médio de aprovação
+    - Diferenças de requisitos por estado
 
 ## O que está incluso
 
--
--
--
-
-## Como vendemos
+!!! info "A preencher"
+    - Processo de verificação
+    - Configuração da conta
+    - Gestão do perfil
+    - Gestão de leads (respostas, qualificação)
+    - Disputa de bad leads
+    - Relatórios
 
 ## Como entregamos
 
-### Processo de verificação
-
-### Gestão de leads
-
-<!-- Como o cliente recebe leads e como disputamos os "bad leads". -->
-
-### Cadência de otimização
-
-## Precificação
+!!! info "A preencher"
+    - Onboarding técnico (documentação, background check)
+    - Configuração inicial da conta LSA
+    - Cadência de otimização
+    - Rotina de disputa de bad leads
+    - Ferramentas usadas
 
 ## Checklist de qualidade
 
-- [ ]
-- [ ]
-- [ ]
+!!! info "A preencher"
 
-## Perguntas frequentes
+## Perguntas frequentes do cliente
+
+!!! info "A preencher"
