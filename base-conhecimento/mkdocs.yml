@@ -1,0 +1,98 @@
+site_name: Base de Conhecimento da Agência
+site_description: Processos, cases, templates e conhecimento técnico da agência
+site_author: Equipe da Agência
+docs_dir: docs
+site_dir: site
+
+theme:
+  name: material
+  language: pt-BR
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Modo escuro
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Modo claro
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - navigation.indexes
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.action.edit
+    - toc.follow
+  icon:
+    repo: fontawesome/brands/github
+
+plugins:
+  - search:
+      lang:
+        - pt
+        - en
+  - tags
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+nav:
+  - Início: index.md
+  - Processos e SOPs:
+      - processos/index.md
+      - Onboarding de cliente: processos/onboarding-cliente.md
+      - Criação de campanha Meta Ads: processos/criacao-campanha-meta.md
+      - Reunião de checkpoint: processos/reuniao-checkpoint.md
+  - Clientes e Cases:
+      - clientes/index.md
+      - Template de case: clientes/template-case.md
+  - Templates e Assets:
+      - modelos/index.md
+      - Briefing de cliente: modelos/briefing.md
+      - Proposta comercial: modelos/proposta.md
+  - Conhecimento Técnico:
+      - conhecimento/index.md
+      - Meta Ads - Fundamentos: conhecimento/meta-ads-fundamentos.md
+      - Estrutura de campanha: conhecimento/estrutura-campanha.md
+      - Glossário: conhecimento/glossario.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/
+  generator: false
+
+copyright: Copyright &copy; 2026 - Sua Agência
