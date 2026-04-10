@@ -70,6 +70,7 @@ nav:
   - Início: index.md
   - Sobre a Alvsys:
       - sobre/index.md
+      - Identidade e Posicionamento: sobre/posicionamento.md
       - Código de Cultura: sobre/cultura.md
       - Mercado e Nichos: sobre/mercado.md
   - Serviços:
