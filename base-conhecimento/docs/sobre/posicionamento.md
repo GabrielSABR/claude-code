@@ -1,67 +1,63 @@
 # Identidade e Posicionamento
 
-## Quem somos
+## Formato de resposta
 
-**Gabriel Alves** — CEO da Alvsys  
-**Conceito central:** *Marketing com Dados*
+- Responda apenas com a resposta final.
+- Sem explicações extras, a menos que isso esteja na própria base de conhecimento.
 
-Você não "roda anúncio". Você cria um **sistema de aquisição** com rastreio, padronização e otimização contínua — pra gerar leads qualificados e reuniões de fechamento, com clareza do que está funcionando.
+---
 
-## Proposta de valor
+## BASE DE CONHECIMENTO PARA SUA CONSULTA
 
-O que a Alvsys entrega que a maioria não entrega:
+## Identidade e Proposta de Valor
 
-1. **Especialização real** em sistemas de presença digital (não é agência genérica)
-2. **Processo orientado a dados**: tracking, eventos, funil e tomada de decisão por números
-3. **Execução focada em venda**: campanhas + criativos + páginas/WhatsApp com roteiro pra virar reunião
-4. **Rotina de otimização** com padrão e cadência — não depende de "feeling"
-5. **Foco em ROI**: provas sociais reais, sem promessa vazia
+Nome: *(a preencher — qual é o nome do CEO/responsável?)*
+Título: CEO da ALVSYS
+Área de Atuação: Empresários brasileiros nos EUA que precisam de um sistema completo de presença digital e aquisição de clientes.
 
-## Credenciais
+O que a ALVSYS entrega: não "roda anúncio" de forma isolada — constrói um sistema integrado de aquisição onde cada peça tem um papel claro no funil:
 
-- Mais de **3 anos de experiência** em tráfego pago
-- Mais de **R$ 5 milhões gerenciados** em investimento
-- Certificações **Google Pesquisa** e **Meta Ads**
+> **Google Meu Negócio** constrói a base e a confiança local → **Tráfego Pago** traz o volume de pessoas qualificadas → **Site / Landing Page** é onde a venda é fechada.
 
-## Contexto do negócio
+O que oferece que a maioria não oferece:
 
-| Campo | Detalhe |
-|-------|---------|
-| Mercado | Marketing digital (performance) |
-| Nicho | Imobiliárias que faturam entre R$ 40k e R$ 100k/mês |
-| Oferta principal | Gestão de tráfego pago (Meta Ads + Google Ads) para gerar leads e reuniões |
-| Ticket médio | R$ 2.500/mês |
-| Aquisição de clientes | Tráfego pago + orgânico, com foco em marcar reunião de fechamento |
+1. **Especialização no mercado brasileiro nos EUA** — foco nos nichos de Construção, Limpeza Residencial e Beleza, nas regiões com maior concentração de brasileiros (MA, FL, NY)
+2. **Sistema integrado, não serviços soltos** — GMB + Tráfego + LP trabalham juntos, não isolados
+3. **Google Local Service Ads (LSA)** — selo "Google Guaranteed", paga por lead (não por clique), o mais confiável para o consumidor americano
+4. **Estratégia de avaliações 5 estrelas** no Google Maps — autoridade orgânica sem custo por clique
+5. **Landing Pages em inglês com design americano** — copy e CTA adaptados para o mercado norte-americano
 
-## Posicionamento
+Credenciais Essenciais:
+*(a preencher — ex: anos de experiência, volume gerenciado em USD, certificações)*
 
-- **Nicho e especializado** — imobiliárias, não todo mundo
-- **Premium "pé no chão"** — cobra pelo método, processo e consistência, não por promessa
-- **Seletivo, não massivo** — poucos clientes, mais resultado e controle por conta
+Contexto do negócio:
 
-## Missão e filosofia
+- Mercado/indústria: marketing digital (performance), foco no mercado norte-americano atendendo brasileiros nos EUA
+- Nichos: Construção, Limpeza Residencial (House Cleaning) e Beleza
+- Oferta principal: sistema completo de presença digital — Landing Page + Google Meu Negócio + Tráfego Pago (Meta Ads, Google Ads e/ou LSA)
+- Ticket médio: *(a preencher — qual é o ticket médio por cliente?)*
+- Regiões prioritárias: Massachusetts (Boston), Flórida (Orlando, Miami), Nova York (NYC)
+- Aquisição de clientes: *(a preencher — como você chega nos seus clientes? prospecção ativa, indicação, tráfego próprio?)*
 
-**"Marketing com Dados"**
+Posicionamento:
 
-- **Transformar tráfego em previsibilidade**: medir, otimizar e escalar com clareza do funil
-- **Tráfego serve o comercial**: o objetivo final é reunião e venda, não métrica de vaidade
-- **Transparência total**: o que foi feito, por que foi feito e o que os dados dizem sobre o próximo passo
+*(a preencher — como você quer ser percebido? Especializado? Premium? Acessível? Seletivo?)*
 
-!!! info "Filosofia aplicada"
-    Toda entrega da Alvsys deve responder três perguntas para o cliente:
+Missão / filosofia:
 
-    1. *O que foi feito esta semana?*
-    2. *Por que foi feito?*
-    3. *O que os dados dizem sobre o próximo passo?*
+*(a preencher — qual é a missão da Alvsys em uma frase? O que move o negócio além do lucro?)*
 
-## Como comunicar o posicionamento
+---
 
-### O que dizer
+## Campos em aberto
 
-> "Não somos uma agência de tráfego. Somos um sistema de aquisição orientado a dados. Cada campanha, cada criativo, cada página tem um papel claro no funil — e a gente mede tudo."
+Para completar esta página, preciso que você responda:
 
-### O que não dizer
-
-- Não promise ROI específico sem contexto da conta
-- Não use "vamos explodir suas vendas" — contraria a filosofia de transparência
-- Não aceite cliente que quer resultado sem processo — não é o perfil da Alvsys
+| Campo | Pergunta |
+|-------|----------|
+| **Nome** | Qual é o nome do CEO/fundador? |
+| **Credenciais** | Há quanto tempo no mercado? Quanto já gerenciou em USD? Tem certificações? |
+| **Ticket médio** | Qual é o valor médio que um cliente paga por mês para a Alvsys? |
+| **Aquisição** | Como você encontra seus clientes hoje? |
+| **Posicionamento** | Em uma linha: como quer ser percebido no mercado? |
+| **Missão** | Qual é a missão da Alvsys em uma frase? |
