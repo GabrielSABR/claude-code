@@ -2,19 +2,30 @@
 
 Site estático de documentação interna construído com [MkDocs Material](https://squidfunk.github.io/mkdocs-material/).
 
+**Status atual**: esqueleto pronto, conteúdo a ser preenchido pela equipe.
+
 ## Estrutura
 
 ```
 base-conhecimento/
-├── mkdocs.yml           # Configuração do site
+├── mkdocs.yml           # Configuração do site e navegação
 ├── requirements.txt     # Dependências Python
 ├── vercel.json          # Configuração de deploy na Vercel
-├── docs/                # Todo o conteúdo (markdown)
+├── docs/
 │   ├── index.md
-│   ├── processos/       # SOPs internos
-│   ├── clientes/        # Cases e histórico
-│   ├── templates/       # Briefings, propostas, etc.
-│   └── conhecimento/    # Conhecimento técnico
+│   ├── servicos/              # Como cada serviço é entregue
+│   │   ├── site-landing-page.md
+│   │   ├── google-business-profile.md
+│   │   ├── trafego-pago/
+│   │   │   ├── meta-ads.md
+│   │   │   ├── google-ads.md
+│   │   │   └── local-service-ads.md
+│   │   ├── funil-de-vendas.md
+│   │   ├── sistemas/
+│   │   └── consultorias.md
+│   ├── processos/             # Processos internos da equipe
+│   ├── clientes/              # Cases e histórico de clientes
+│   └── recursos/              # Ferramentas, links, materiais de apoio
 └── site/                # Build gerado (ignorado no git)
 ```
 
@@ -36,69 +47,20 @@ Abra http://localhost:8000 — o site recarrega automaticamente ao editar arquiv
 2. Se for uma página nova, adicione a entrada na seção `nav:` do `mkdocs.yml`
 3. Salve, commite e faça push — o deploy roda sozinho
 
-### Exemplo: adicionando um novo SOP
+## Deploy na Vercel
 
-```bash
-# 1. Criar o arquivo
-touch docs/processos/novo-processo.md
-
-# 2. Editar o mkdocs.yml, seção nav, adicionar:
-#    - Novo processo: processos/novo-processo.md
-
-# 3. Ver localmente
-mkdocs serve
-
-# 4. Commitar
-git add .
-git commit -m "docs: adiciona SOP novo-processo"
-git push
-```
-
-## Deploy
-
-### Opção 1 — Vercel (recomendada)
-
-1. Acesse [vercel.com](https://vercel.com) e conecte o repositório
+1. Acesse [vercel.com](https://vercel.com) e importe este repositório
 2. Ao importar, configure:
     - **Root Directory**: `base-conhecimento`
     - **Framework Preset**: Other
-    - As demais opções já estão no `vercel.json`
-3. Clique em Deploy — pronto
+    - As demais opções já vêm do `vercel.json`
+3. Clique em Deploy
 
-A cada push na branch principal, a Vercel faz rebuild automaticamente.
+A cada push, a Vercel faz rebuild automaticamente.
 
-### Opção 2 — GitHub Pages
+## Próximos passos
 
-```bash
-cd base-conhecimento
-mkdocs gh-deploy
-```
-
-Isso gera o site e dá push na branch `gh-pages`. Habilite GitHub Pages nessa branch nas settings do repo.
-
-### Opção 3 — Qualquer hospedagem estática
-
-```bash
-mkdocs build
-# Faz upload da pasta site/ para S3, Netlify, Cloudflare Pages, etc.
-```
-
-## Dicas de escrita
-
-- **Seja direto**: a equipe não tem tempo de ler 3 páginas para achar uma info
-- **Use listas e tabelas**: mais fáceis de escanear
-- **Inclua exemplos reais**: o que diferencia documentação viva de documentação morta
-- **Admonitions**: use blocos `!!! tip`, `!!! warning`, `!!! danger` para destacar avisos
-
-Exemplo de admonition:
-
-```markdown
-!!! tip "Dica rápida"
-    Aqui vai o conteúdo destacado.
-```
-
-## Manutenção
-
-- **Responsável geral**: [definir]
-- **Revisão trimestral**: olhar cada seção e marcar o que está desatualizado
-- **Regra de ouro**: se algo mudou na operação, atualize a página **no mesmo dia**
+- [ ] Preencher a página de cada serviço
+- [ ] Criar primeiros processos internos (ex: onboarding de cliente)
+- [ ] Documentar clientes atuais
+- [ ] Adicionar recursos / ferramentas da agência

@@ -1,5 +1,5 @@
 site_name: Base de Conhecimento da Agência
-site_description: Processos, cases, templates e conhecimento técnico da agência
+site_description: Documentação interna da agência
 site_author: Equipe da Agência
 docs_dir: docs
 site_dir: site
@@ -34,10 +34,7 @@ theme:
     - search.highlight
     - search.share
     - content.code.copy
-    - content.action.edit
     - toc.follow
-  icon:
-    repo: fontawesome/brands/github
 
 plugins:
   - search:
@@ -71,28 +68,26 @@ markdown_extensions:
 
 nav:
   - Início: index.md
-  - Processos e SOPs:
+  - Serviços:
+      - servicos/index.md
+      - Site / Landing Page: servicos/site-landing-page.md
+      - Google Business Profile: servicos/google-business-profile.md
+      - Tráfego Pago:
+          - servicos/trafego-pago/index.md
+          - Meta Ads: servicos/trafego-pago/meta-ads.md
+          - Google Ads: servicos/trafego-pago/google-ads.md
+          - Local Service Ads: servicos/trafego-pago/local-service-ads.md
+      - Funil de Vendas: servicos/funil-de-vendas.md
+      - Sistemas e Automações: servicos/sistemas/index.md
+      - Consultorias: servicos/consultorias.md
+  - Processos Internos:
       - processos/index.md
-      - Onboarding de cliente: processos/onboarding-cliente.md
-      - Criação de campanha Meta Ads: processos/criacao-campanha-meta.md
-      - Reunião de checkpoint: processos/reuniao-checkpoint.md
   - Clientes e Cases:
       - clientes/index.md
-      - Template de case: clientes/template-case.md
-  - Templates e Assets:
-      - modelos/index.md
-      - Briefing de cliente: modelos/briefing.md
-      - Proposta comercial: modelos/proposta.md
-  - Conhecimento Técnico:
-      - conhecimento/index.md
-      - Meta Ads - Fundamentos: conhecimento/meta-ads-fundamentos.md
-      - Estrutura de campanha: conhecimento/estrutura-campanha.md
-      - Glossário: conhecimento/glossario.md
+  - Recursos:
+      - recursos/index.md
 
 extra:
-  social:
-    - icon: fontawesome/brands/github
-      link: https://github.com/
   generator: false
 
 copyright: Copyright &copy; 2026 - Sua Agência

@@ -1,21 +1,28 @@
 # Clientes e Cases
 
-Histórico vivo dos clientes da agência. Aqui documentamos **o que fizemos, o que funcionou, o que deu errado e o que aprendemos**.
+!!! info "Seção a ser preenchida"
+    Aqui ficará o histórico dos clientes da agência — quem são, o que entregamos, que resultados conseguimos e o que aprendemos.
 
-## Por que documentar cases?
+## Como organizar
 
-- **Vendas**: cases reais são o maior argumento comercial.
-- **Equipe**: novos membros entendem rapidamente o contexto de cada cliente.
-- **Aprendizado**: padrões se tornam visíveis quando você olha para vários projetos.
-- **Portfólio**: quando o cliente autoriza, vira material público.
+Opção 1 — **por cliente**: uma página por cliente, tudo que foi feito para ele.
 
-## Como documentar um case
+Opção 2 — **por case**: uma página por projeto/entrega, separado mesmo que seja do mesmo cliente.
 
-Use o [template de case](template-case.md) como ponto de partida. Cada case deve ficar em um arquivo separado dentro desta pasta.
+Opção 3 — **híbrido**: ficha de cliente + cases separados.
 
-!!! info "Sobre confidencialidade"
-    Antes de publicar qualquer case com o nome real do cliente, **verifique se há autorização**. Quando não houver, anonimize: "Cliente do segmento X" em vez do nome.
+Escolha o formato que faz mais sentido para a agência e crie os arquivos dentro desta pasta.
 
-## Cases documentados
+## O que documentar em cada case
 
-*(Nenhum case documentado ainda — comece pelo [template](template-case.md))*
+- Resumo (1 parágrafo)
+- Contexto inicial
+- O que foi entregue
+- Resultados (números)
+- O que funcionou
+- O que não funcionou
+- Aprendizados
+
+## Cuidado com confidencialidade
+
+Antes de publicar um case com nome real, confirme se há autorização. Quando não houver, use "Cliente do segmento X".

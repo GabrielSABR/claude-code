@@ -6,17 +6,25 @@ hide:
 
 # Base de Conhecimento da Agência
 
-Bem-vindo à base de conhecimento interna. Aqui você encontra tudo que a equipe precisa para operar com padrão e qualidade: processos, cases, templates e conhecimento técnico.
+Documentação interna viva para a equipe. Aqui ficam processos, serviços, cases e recursos compartilhados.
 
-## O que você encontra aqui
+## Navegação
 
 <div class="grid cards" markdown>
 
--   :material-cog: **Processos e SOPs**
+-   :material-tools: **Serviços**
 
     ---
 
-    Fluxos de trabalho e procedimentos operacionais padronizados da agência.
+    Como entregamos cada serviço da agência, do início ao fim.
+
+    [:octicons-arrow-right-24: Ver serviços](servicos/index.md)
+
+-   :material-clipboard-list: **Processos Internos**
+
+    ---
+
+    Rotinas, rituais e procedimentos operacionais da equipe.
 
     [:octicons-arrow-right-24: Ver processos](processos/index.md)
 
@@ -24,42 +32,19 @@ Bem-vindo à base de conhecimento interna. Aqui você encontra tudo que a equipe
 
     ---
 
-    Histórico de projetos, resultados alcançados e aprendizados.
+    Histórico de projetos, resultados e aprendizados.
 
     [:octicons-arrow-right-24: Ver cases](clientes/index.md)
 
--   :material-file-document-multiple: **Templates e Assets**
+-   :material-book-open-variant: **Recursos**
 
     ---
 
-    Modelos de briefing, proposta, contrato e outros documentos reutilizáveis.
+    Links, ferramentas, referências e materiais de apoio.
 
-    [:octicons-arrow-right-24: Ver templates](modelos/index.md)
-
--   :material-book-open-variant: **Conhecimento Técnico**
-
-    ---
-
-    Referências, guias e tutoriais sobre tráfego pago, criativos e estratégia.
-
-    [:octicons-arrow-right-24: Ver conhecimento](conhecimento/index.md)
+    [:octicons-arrow-right-24: Ver recursos](recursos/index.md)
 
 </div>
 
-## Como contribuir
-
-Toda a base é escrita em **Markdown** e versionada no Git. Para adicionar ou atualizar algo:
-
-1. Edite ou crie o arquivo `.md` dentro de `docs/`
-2. Se for uma página nova, inclua ela no `nav:` do `mkdocs.yml`
-3. Faça commit e push — o deploy roda sozinho
-
-!!! tip "Dica"
-    Use a **busca** no topo da página para encontrar qualquer conteúdo rapidamente. Ela indexa o texto completo de todas as páginas.
-
-## Padrões de escrita
-
-- **Seja direto**: vá ao ponto, evite enrolação.
-- **Use listas** quando puder — facilita o escaneamento.
-- **Inclua exemplos reais** sempre que possível.
-- **Mantenha atualizado**: se um processo mudou, atualize a página.
+!!! info "Base em construção"
+    Esta base ainda está sendo populada. As seções existem como esqueleto — o conteúdo vai sendo adicionado conforme a equipe documenta o dia a dia.
