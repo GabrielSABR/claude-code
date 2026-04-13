@@ -18,28 +18,28 @@ styles = getSampleStyleSheet()
 
 name_style = ParagraphStyle(
     'Name', fontSize=22, fontName='Helvetica-Bold',
-    spaceAfter=6, textColor=colors.black
+    spaceAfter=4, leftIndent=0, alignment=TA_LEFT, textColor=colors.black
 )
 contact_style = ParagraphStyle(
     'Contact', fontSize=10, fontName='Helvetica',
-    leading=16, spaceAfter=2
+    leading=16, spaceAfter=2, leftIndent=0, alignment=TA_LEFT
 )
 section_style = ParagraphStyle(
     'Section', fontSize=11, fontName='Helvetica-Bold',
-    spaceBefore=16, spaceAfter=2, textColor=colors.black,
-    borderPad=0
+    spaceBefore=14, spaceAfter=2, leftIndent=0, alignment=TA_LEFT,
+    textColor=colors.black
 )
 company_style = ParagraphStyle(
     'Company', fontSize=10, fontName='Helvetica-Bold',
-    spaceBefore=8, spaceAfter=1
+    spaceBefore=8, spaceAfter=1, leftIndent=0, alignment=TA_LEFT
 )
 date_style = ParagraphStyle(
     'Date', fontSize=10, fontName='Helvetica',
-    spaceAfter=1, leftIndent=0
+    spaceAfter=1, leftIndent=0, alignment=TA_LEFT
 )
 role_style = ParagraphStyle(
     'Role', fontSize=10, fontName='Helvetica-Oblique',
-    spaceAfter=4
+    spaceAfter=4, leftIndent=0, alignment=TA_LEFT
 )
 bullet_style = ParagraphStyle(
     'Bullet', fontSize=10, fontName='Helvetica',
@@ -48,14 +48,14 @@ bullet_style = ParagraphStyle(
 )
 body_style = ParagraphStyle(
     'Body', fontSize=10, fontName='Helvetica',
-    leading=14, spaceAfter=4, alignment=TA_JUSTIFY
+    leading=14, spaceAfter=4, leftIndent=0, alignment=TA_JUSTIFY
 )
 
 story = []
 
 # Name
 story.append(Paragraph("Gabriel Silva Alves", name_style))
-story.append(HRFlowable(width="100%", thickness=0.5, color=colors.black, spaceAfter=12))
+story.append(HRFlowable(width="100%", thickness=0.5, color=colors.black, spaceBefore=2, spaceAfter=8))
 
 # Contact info - two columns via table
 from reportlab.platypus import Table, TableStyle
@@ -77,7 +77,7 @@ contact_table.setStyle(TableStyle([
     ('TOPPADDING', (0,0), (-1,-1), 0),
 ]))
 story.append(contact_table)
-story.append(Spacer(1, 16))
+story.append(Spacer(1, 8))
 
 # PROFESSIONAL EXPERIENCE
 story.append(Paragraph("PROFESSIONAL EXPERIENCE", section_style))
