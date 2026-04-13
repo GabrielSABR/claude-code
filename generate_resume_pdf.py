@@ -18,7 +18,7 @@ styles = getSampleStyleSheet()
 
 name_style = ParagraphStyle(
     'Name', fontSize=22, fontName='Helvetica-Bold',
-    spaceAfter=10, textColor=colors.black
+    spaceAfter=6, textColor=colors.black
 )
 contact_style = ParagraphStyle(
     'Contact', fontSize=10, fontName='Helvetica',
@@ -26,7 +26,7 @@ contact_style = ParagraphStyle(
 )
 section_style = ParagraphStyle(
     'Section', fontSize=11, fontName='Helvetica-Bold',
-    spaceBefore=14, spaceAfter=4, textColor=colors.black,
+    spaceBefore=16, spaceAfter=2, textColor=colors.black,
     borderPad=0
 )
 company_style = ParagraphStyle(
@@ -55,7 +55,7 @@ story = []
 
 # Name
 story.append(Paragraph("Gabriel Silva Alves", name_style))
-story.append(HRFlowable(width="100%", thickness=0.5, color=colors.black, spaceAfter=6))
+story.append(HRFlowable(width="100%", thickness=0.5, color=colors.black, spaceAfter=12))
 
 # Contact info - two columns via table
 from reportlab.platypus import Table, TableStyle
@@ -77,11 +77,11 @@ contact_table.setStyle(TableStyle([
     ('TOPPADDING', (0,0), (-1,-1), 0),
 ]))
 story.append(contact_table)
-story.append(Spacer(1, 10))
+story.append(Spacer(1, 16))
 
 # PROFESSIONAL EXPERIENCE
 story.append(Paragraph("PROFESSIONAL EXPERIENCE", section_style))
-story.append(HRFlowable(width="100%", thickness=0.5, color=colors.black, spaceAfter=6))
+story.append(HRFlowable(width="100%", thickness=0.5, color=colors.black, spaceAfter=10))
 
 story.append(Paragraph("Utequi Digital Solutions", company_style))
 story.append(Paragraph("November/2022 – July/2023", date_style))
@@ -133,7 +133,7 @@ for b in bullets_participa:
 
 # ACADEMIC BACKGROUND
 story.append(Paragraph("ACADEMIC BACKGROUND", section_style))
-story.append(HRFlowable(width="100%", thickness=0.5, color=colors.black, spaceAfter=6))
+story.append(HRFlowable(width="100%", thickness=0.5, color=colors.black, spaceAfter=10))
 story.append(Paragraph(
     "Currently enrolled in the 7th Semester of Business Administration – "
     "Veiga de Almeida University – UVA – RJ",
@@ -142,7 +142,7 @@ story.append(Paragraph(
 
 # COMPUTER SKILLS
 story.append(Paragraph("COMPUTER SKILLS", section_style))
-story.append(HRFlowable(width="100%", thickness=0.5, color=colors.black, spaceAfter=6))
+story.append(HRFlowable(width="100%", thickness=0.5, color=colors.black, spaceAfter=10))
 story.append(Paragraph("Intermediate proficiency in Word, Excel and Canva;", body_style))
 story.append(Paragraph(
     "Advanced proficiency in Internet, Windows 10, Web Design, WordPress, traffic management, "
@@ -157,7 +157,7 @@ story.append(Paragraph(
 
 # COMPLEMENTARY COURSES
 story.append(Paragraph("COMPLEMENTARY COURSES", section_style))
-story.append(HRFlowable(width="100%", thickness=0.5, color=colors.black, spaceAfter=6))
+story.append(HRFlowable(width="100%", thickness=0.5, color=colors.black, spaceAfter=10))
 
 courses = [
     "• Paid Traffic – Sobral Traffic Community",
@@ -173,7 +173,7 @@ for c in courses:
 
 # PERSONAL PROFILE
 story.append(Paragraph("PERSONAL PROFILE", section_style))
-story.append(HRFlowable(width="100%", thickness=0.5, color=colors.black, spaceAfter=6))
+story.append(HRFlowable(width="100%", thickness=0.5, color=colors.black, spaceAfter=10))
 story.append(Paragraph(
     "Responsible, creative, focused, good communication skills, punctual, proactive and "
     "multitasking, with ease in learning and adapting to various areas.",
