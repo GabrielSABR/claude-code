@@ -1,0 +1,115 @@
+{
+  "name": "2 - Recebe Transcrição da AssemblyAI e Salva no GitHub",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "assemblyai-callback",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "node-assemblyai-webhook",
+      "name": "AssemblyAI Callback",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300],
+      "webhookId": "assemblyai-callback"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict" },
+          "conditions": [
+            {
+              "id": "cond-status",
+              "leftValue": "={{ $json.body.status }}",
+              "rightValue": "completed",
+              "operator": { "type": "string", "operation": "equals" }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "node-check-status",
+      "name": "Transcrição Completa?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "=https://api.assemblyai.com/v2/transcript/{{ $json.body.transcript_id }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "authorization", "value": "={{ $vars.ASSEMBLYAI_API_KEY }}" }
+          ]
+        },
+        "options": {}
+      },
+      "id": "node-get-transcript",
+      "name": "Buscar Transcrição Completa",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [680, 200]
+    },
+    {
+      "parameters": {
+        "jsCode": "const data = $input.first().json;\nconst audioUrl = data.audio_url || '';\nconst filename = audioUrl.split('/').pop().replace(/\\.[^.]+$/, '');\nconst transcriptText = data.text || '';\nconst now = new Date().toISOString().slice(0, 10);\nconst outputFilename = `${filename}_${now}.txt`;\nconst content = Buffer.from(transcriptText).toString('base64');\n\nreturn [{\n  json: {\n    outputFilename,\n    content,\n    transcriptText\n  }\n}];"
+      },
+      "id": "node-prepare",
+      "name": "Preparar Arquivo",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [900, 200]
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://api.github.com/repos/GabrielSABR/claude-code/contents/videos/transcricoes/{{ $json.outputFilename }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "authorization", "value": "=Bearer {{ $vars.GITHUB_TOKEN }}" },
+            { "name": "accept", "value": "application/vnd.github+json" },
+            { "name": "content-type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "bodyParameters": {
+          "parameters": [
+            { "name": "message", "value": "=add: transcricao de {{ $json.outputFilename }}" },
+            { "name": "content", "value": "={{ $json.content }}" }
+          ]
+        },
+        "options": {}
+      },
+      "id": "node-save-github",
+      "name": "Salvar no GitHub",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1120, 200]
+    }
+  ],
+  "connections": {
+    "AssemblyAI Callback": {
+      "main": [[{ "node": "Transcrição Completa?", "type": "main", "index": 0 }]]
+    },
+    "Transcrição Completa?": {
+      "main": [
+        [{ "node": "Buscar Transcrição Completa", "type": "main", "index": 0 }],
+        []
+      ]
+    },
+    "Buscar Transcrição Completa": {
+      "main": [[{ "node": "Preparar Arquivo", "type": "main", "index": 0 }]]
+    },
+    "Preparar Arquivo": {
+      "main": [[{ "node": "Salvar no GitHub", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": { "executionOrder": "v1" }
+}
