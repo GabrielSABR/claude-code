@@ -1,0 +1,94 @@
+{
+  "name": "1 - Recebe Push do GitHub e Envia para AssemblyAI",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "github-video-push",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "node-github-webhook",
+      "name": "GitHub Push",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300],
+      "webhookId": "github-video-push"
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $input.first().json.body || $input.first().json;\nconst commits = body.commits || [];\nconst videoExtensions = ['mp4', 'mov', 'mkv', 'avi', 'webm'];\nconst videoFiles = [];\n\nfor (const commit of commits) {\n  const files = [...(commit.added || []), ...(commit.modified || [])];\n  for (const file of files) {\n    const isVideo = file.startsWith('videos/') &&\n                    !file.includes('/transcricoes/') &&\n                    file !== 'videos/.gitkeep';\n    if (isVideo) {\n      const ext = file.split('.').pop().toLowerCase();\n      if (videoExtensions.includes(ext)) {\n        videoFiles.push({\n          json: {\n            filepath: file,\n            filename: file.split('/').pop(),\n            mediaUrl: `https://media.githubusercontent.com/media/GabrielSABR/claude-code/main/${file}`\n          }\n        });\n      }\n    }\n  }\n}\n\nreturn videoFiles.length > 0 ? videoFiles : [{ json: { skip: true } }];"
+      },
+      "id": "node-filter",
+      "name": "Filtrar Vídeos",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict" },
+          "conditions": [
+            {
+              "id": "cond-skip",
+              "leftValue": "={{ $json.skip }}",
+              "rightValue": true,
+              "operator": { "type": "boolean", "operation": "notEquals" }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "node-if",
+      "name": "Tem Vídeo?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.assemblyai.com/v2/transcript",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "authorization", "value": "={{ $vars.ASSEMBLYAI_API_KEY }}" },
+            { "name": "content-type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "bodyParameters": {
+          "parameters": [
+            { "name": "audio_url", "value": "={{ $json.mediaUrl }}" },
+            { "name": "language_code", "value": "pt" },
+            { "name": "webhook_url", "value": "=https://SEU_DOMINIO_VPS/webhook/assemblyai-callback" }
+          ]
+        },
+        "options": {}
+      },
+      "id": "node-assemblyai-submit",
+      "name": "Enviar para AssemblyAI",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [900, 200]
+    }
+  ],
+  "connections": {
+    "GitHub Push": {
+      "main": [[{ "node": "Filtrar Vídeos", "type": "main", "index": 0 }]]
+    },
+    "Filtrar Vídeos": {
+      "main": [[{ "node": "Tem Vídeo?", "type": "main", "index": 0 }]]
+    },
+    "Tem Vídeo?": {
+      "main": [
+        [{ "node": "Enviar para AssemblyAI", "type": "main", "index": 0 }],
+        []
+      ]
+    }
+  },
+  "settings": { "executionOrder": "v1" }
+}
