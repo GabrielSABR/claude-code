@@ -71,8 +71,8 @@
       "parameters": {
         "method": "PUT",
         "url": "={{ 'https://api.github.com/repos/GabrielSABR/claude-code/contents/videos/transcricoes/' + $json.outputFilename }}",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpHeaderAuth",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "githubApi",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
@@ -91,7 +91,7 @@
         "options": {}
       },
       "credentials": {
-        "httpHeaderAuth": {
+        "githubApi": {
           "id": "",
           "name": "GitHub Token"
         }
