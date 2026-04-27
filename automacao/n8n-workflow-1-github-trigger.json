@@ -51,23 +51,24 @@
       "parameters": {
         "method": "POST",
         "url": "https://api.assemblyai.com/v2/transcript",
-        "sendHeaders": true,
-        "headerParameters": {
-          "parameters": [
-            { "name": "authorization", "value": "={{ $vars.ASSEMBLYAI_API_KEY }}" },
-            { "name": "content-type", "value": "application/json" }
-          ]
-        },
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "contentType": "json",
         "bodyParameters": {
           "parameters": [
             { "name": "audio_url", "value": "={{ $json.mediaUrl }}" },
             { "name": "language_code", "value": "pt" },
-            { "name": "webhook_url", "value": "=https://SEU_DOMINIO_VPS/webhook/assemblyai-callback" }
+            { "name": "webhook_url", "value": "https://SEU_DOMINIO_VPS/webhook/assemblyai-callback" }
           ]
         },
         "options": {}
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "AssemblyAI"
+        }
       },
       "id": "node-assemblyai-submit",
       "name": "Enviar para AssemblyAI",
