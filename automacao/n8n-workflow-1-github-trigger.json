@@ -59,7 +59,7 @@
           "parameters": [
             { "name": "audio_url", "value": "={{ $json.mediaUrl }}" },
             { "name": "language_code", "value": "pt" },
-            { "name": "webhook_url", "value": "https://SEU_DOMINIO_VPS/webhook/assemblyai-callback" }
+            { "name": "webhook_url", "value": "https://n8n.srv1579450.hstgr.cloud/webhook/assemblyai-callback" }
           ]
         },
         "options": {}
