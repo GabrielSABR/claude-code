@@ -40,14 +40,16 @@
     {
       "parameters": {
         "method": "GET",
-        "url": "=https://api.assemblyai.com/v2/transcript/{{ $json.body.transcript_id }}",
-        "sendHeaders": true,
-        "headerParameters": {
-          "parameters": [
-            { "name": "authorization", "value": "={{ $vars.ASSEMBLYAI_API_KEY }}" }
-          ]
-        },
+        "url": "={{ 'https://api.assemblyai.com/v2/transcript/' + $json.body.transcript_id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
         "options": {}
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "AssemblyAI"
+        }
       },
       "id": "node-get-transcript",
       "name": "Buscar Transcrição Completa",
@@ -68,11 +70,12 @@
     {
       "parameters": {
         "method": "PUT",
-        "url": "=https://api.github.com/repos/GabrielSABR/claude-code/contents/videos/transcricoes/{{ $json.outputFilename }}",
+        "url": "={{ 'https://api.github.com/repos/GabrielSABR/claude-code/contents/videos/transcricoes/' + $json.outputFilename }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            { "name": "authorization", "value": "=Bearer {{ $vars.GITHUB_TOKEN }}" },
             { "name": "accept", "value": "application/vnd.github+json" },
             { "name": "content-type", "value": "application/json" }
           ]
@@ -81,11 +84,17 @@
         "contentType": "json",
         "bodyParameters": {
           "parameters": [
-            { "name": "message", "value": "=add: transcricao de {{ $json.outputFilename }}" },
+            { "name": "message", "value": "={{ 'add: transcricao de ' + $json.outputFilename }}" },
             { "name": "content", "value": "={{ $json.content }}" }
           ]
         },
         "options": {}
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "GitHub Token"
+        }
       },
       "id": "node-save-github",
       "name": "Salvar no GitHub",
